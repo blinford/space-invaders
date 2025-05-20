@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwiqwwft8qbrr"]
+
+[ext_resource type="Script" path="res://game/player/player.gd" id="1_mxm05"]
+[ext_resource type="Texture2D" uid="uid://ex2utif16ulj" path="res://icon.svg" id="2_acvkf"]
+
+[node name="Player" type="Node2D"]
+script = ExtResource("1_mxm05")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_acvkf")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
