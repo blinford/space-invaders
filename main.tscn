@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://50xy36lb36qe"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_4q1nf"]
+[ext_resource type="Material" uid="uid://dy5y7l3rmtiax" path="res://menu/stars/stars.tres" id="2_wafte"]
+[ext_resource type="Texture2D" uid="uid://ex2utif16ulj" path="res://icon.svg" id="3_72qmc"]
+[ext_resource type="PackedScene" uid="uid://cpvvpeori5ydo" path="res://menu/menu.tscn" id="4_k4uey"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_4q1nf")
+
+[node name="Background" type="Sprite2D" parent="."]
+material = ExtResource("2_wafte")
+scale = Vector2(1132, 628)
+texture = ExtResource("3_72qmc")
+
+[node name="Menu" parent="." instance=ExtResource("4_k4uey")]

@@ -10,4 +10,5 @@ script = ExtResource("1_mxm05")
 texture = ExtResource("2_acvkf")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
 one_shot = true
