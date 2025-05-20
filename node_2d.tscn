@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://50xy36lb36qe"]
+[gd_scene load_steps=5 format=3 uid="uid://50xy36lb36qe"]
 
 [ext_resource type="Material" uid="uid://dy5y7l3rmtiax" path="res://menu/stars/stars.tres" id="1_dqsff"]
 [ext_resource type="Script" path="res://main.gd" id="1_troby"]
 [ext_resource type="PackedScene" uid="uid://cpvvpeori5ydo" path="res://menu/menu.tscn" id="1_uqf28"]
 [ext_resource type="Texture2D" uid="uid://ex2utif16ulj" path="res://icon.svg" id="2_mm8c1"]
-[ext_resource type="PackedScene" uid="uid://c73j6owcjepc7" path="res://game/game.tscn" id="5_vj36i"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(597, 309)
@@ -16,7 +15,3 @@ scale = Vector2(1132, 628)
 texture = ExtResource("2_mm8c1")
 
 [node name="Menu" parent="." instance=ExtResource("1_uqf28")]
-
-[node name="Game" parent="." instance=ExtResource("5_vj36i")]
-visible = false
-position = Vector2(-2, 243)
