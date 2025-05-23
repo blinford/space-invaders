@@ -2,6 +2,7 @@ extends Node2D
 
 @onready var menu = $Menu
 @onready var game_scene : PackedScene = preload("res://game/game.tscn")
+@onready var save = $Save
 
 var game = null
 
@@ -20,4 +21,5 @@ func _start_game() -> void:
 
 func _on_game_over() -> void:
 	menu.show()
+	save.save_score(game.score)
 	game.queue_free()

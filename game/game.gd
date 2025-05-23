@@ -70,10 +70,11 @@ func _on_enemy_destroyed() -> void:
 	
 func _on_game_over_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies"):
-		print("freeze!")
 		is_game_over = true
 		player.freeze()
 		for enemy in get_tree().get_nodes_in_group("enemies"):
 			enemy.freeze()
+		for bullet in get_tree().get_nodes_in_group("bullets"):
+			bullet.freeze()
 		await get_tree().create_timer(1).timeout
 		game_over.emit()
