@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://c73j6owcjepc7"]
+[gd_scene load_steps=4 format=3 uid="uid://c73j6owcjepc7"]
 
 [ext_resource type="Script" path="res://game/game.gd" id="1_thwth"]
 [ext_resource type="PackedScene" uid="uid://dwiqwwft8qbrr" path="res://game/player/player.tscn" id="2_pqu3n"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cb8x3"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_thwth")
@@ -12,4 +14,18 @@ script = ExtResource("1_thwth")
 wait_time = 3.0
 autostart = true
 
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_cb8x3")
+
+[node name="HUD" type="CenterContainer" parent="."]
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+
+[node name="Label" type="Label" parent="HUD"]
+layout_mode = 2
+
 [connection signal="timeout" from="HordeSpawner" to="." method="_on_horde_spawner_timeout"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_game_over_area_entered"]

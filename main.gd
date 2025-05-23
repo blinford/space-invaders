@@ -15,4 +15,9 @@ func _input(event: InputEvent) -> void:
 func _start_game() -> void:
 	menu.hide()
 	game = game_scene.instantiate()
+	game.connect("game_over", _on_game_over)
 	add_child(game)
+
+func _on_game_over() -> void:
+	menu.show()
+	game.queue_free()
