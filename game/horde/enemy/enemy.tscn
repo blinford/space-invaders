@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bnmqpjw8l7s3k"]
 
-[ext_resource type="Script" path="res://game/enemy/enemy.gd" id="1_ypj01"]
+[ext_resource type="Script" path="res://game/horde/enemy/enemy.gd" id="1_ypj01"]
 [ext_resource type="Texture2D" uid="uid://ex2utif16ulj" path="res://icon.svg" id="2_l54fk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jejpc"]
