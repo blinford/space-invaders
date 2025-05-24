@@ -19,12 +19,12 @@ var score = 0
 func _ready() -> void:
 	time_start = Time.get_ticks_msec()
 	player.connect("spawn_bullet", _spawn_bullet)
-	player.position.x = get_viewport().size.x/2
-	player.position.y = get_viewport().size.y - 100
+	player.position.x = 100
+	player.position.y = get_viewport().size.y/2
 	
 	game_over_area.position = player.position
 	var collision_shape : RectangleShape2D = game_over_area.get_child(0).shape
-	collision_shape.size.x = get_viewport().size.x
+	collision_shape.size.y = get_viewport().size.y
 	
 	hud.size.x = get_viewport().size.x
 	
@@ -45,6 +45,7 @@ func _on_horde_spawner_timeout() -> void:
 	
 func _spawn_horde() -> void:
 	var horde = horde_scene.instantiate()
+	horde.connect("enemy_destroyed", _on_enemy_destroyed)
 	add_child(horde)
 
 func _on_enemy_destroyed() -> void:
@@ -55,8 +56,8 @@ func _on_game_over_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies"):
 		is_game_over = true
 		player.freeze()
-		for enemy in get_tree().get_nodes_in_group("enemies"):
-			enemy.freeze()
+		for horde in get_tree().get_nodes_in_group("hordes"):
+			horde.freeze()
 		for bullet in get_tree().get_nodes_in_group("bullets"):
 			bullet.freeze()
 		await get_tree().create_timer(1).timeout

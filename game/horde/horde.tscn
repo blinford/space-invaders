@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" path="res://game/horde/horde.gd" id="1_kusuk"]
 
-[node name="Horde" type="Node2D"]
+[node name="Horde" type="Node2D" groups=["hordes"]]
 script = ExtResource("1_kusuk")

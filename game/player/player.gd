@@ -14,9 +14,9 @@ var frozen = false
 func _process(delta: float) -> void:
 	if not frozen:
 		# handle movement with acceleration
-		if Input.is_action_pressed("left"):
+		if Input.is_action_pressed("up"):
 			velocity -= acceleration * delta
-		elif Input.is_action_pressed("right"):
+		elif Input.is_action_pressed("down"):
 			velocity += acceleration * delta
 		else:
 			if velocity > 0:
@@ -25,8 +25,9 @@ func _process(delta: float) -> void:
 				velocity = min(velocity + deceleration * delta, 0)
 
 		velocity = clamp(velocity, -max_speed, max_speed)
-		position.x += velocity * delta
+		position.y += velocity * delta
 	
+		position.y = clamp(position.y, 0, get_viewport().size.y)
 		# handle shooting
 		if Input.is_action_pressed("shoot"):
 			if timer.is_stopped():
