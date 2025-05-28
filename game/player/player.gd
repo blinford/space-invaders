@@ -3,8 +3,8 @@ extends Node2D
 signal spawn_bullet
 
 var velocity := 0.0
-@export var acceleration = 1500.0
-@export var deceleration = 1000.0
+@export var acceleration = 2000.0
+@export var deceleration = 1500.0
 @export var max_speed = 700.0
 
 @onready var timer = $Timer

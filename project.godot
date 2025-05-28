@@ -22,6 +22,10 @@ window/size/mode=3
 
 project/assembly_name="space-invaders"
 
+[global_group]
+
+freezable="should implement func freeze()->void:"
+
 [input]
 
 left={

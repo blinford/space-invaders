@@ -5,6 +5,8 @@ signal destroyed
 var time_start
 var time_now
 
+var is_special
+
 var frozen = false
 
 @onready var label = $TimeAliveLabel
@@ -21,8 +23,6 @@ func _process(delta: float) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullets"):
 		destroyed.emit()
-		# $AnimatedSprite.play("explosion")
-		# $AnimatedSprite.connect("animation_finished", self, "_on_animation_finished")
 		queue_free()
 
 func freeze() -> void:
