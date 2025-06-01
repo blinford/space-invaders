@@ -28,6 +28,10 @@ autostart = true
 wait_time = 10.0
 one_shot = true
 
+[node name="GunBoost" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
@@ -110,4 +114,5 @@ vertical_alignment = 1
 [connection signal="timeout" from="HordeSpawner" to="." method="_on_horde_spawner_timeout"]
 [connection signal="timeout" from="PowerUpSpawner" to="." method="_on_power_up_spawner_timeout"]
 [connection signal="timeout" from="SpeedBoost" to="." method="_deactivate_speed_boost"]
+[connection signal="timeout" from="GunBoost" to="." method="_deactivate_gun_boost"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_game_over_area_entered"]

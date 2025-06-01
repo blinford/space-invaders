@@ -22,6 +22,7 @@ signal game_over
 
 @onready var horde_spawner : Timer = $HordeSpawner
 @onready var power_up_spawner : Timer = $PowerUpSpawner
+@onready var gun_boost : Timer = $GunBoost
 @onready var speed_boost : Timer = $SpeedBoost
 
 var time_start
@@ -77,8 +78,17 @@ func _spawn_horde() -> void:
 
 func _spawn_power_up() -> void:
 	var power_up = power_up_scene.instantiate()
-	power_up.connect("power_up_activated", _activate_speed_boost)
+	power_up.connect("power_up_activated", _activate_gun_boost)
 	add_child(power_up)
+	
+func _activate_gun_boost() -> void:
+	(player.timer as Timer).wait_time = 0.3
+	gun_boost.start()
+	power_up_label.text = "Gun Boost Active!!"
+	
+func _deactivate_gun_boost() -> void:
+	(player.timer as Timer).wait_time = 0.5
+	power_up_label.text = ""
 	
 func _activate_speed_boost() -> void:
 	player.max_speed = 1000.0
