@@ -10,7 +10,7 @@ func _ready() -> void:
 	pass
 
 func _input(event: InputEvent) -> void:
-	if Input.is_action_pressed("ui_accept") and game == null:
+	if Input.is_action_pressed("enter") and game == null:
 		_start_game()
 		
 func _start_game() -> void:

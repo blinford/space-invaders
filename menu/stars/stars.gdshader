@@ -15,13 +15,13 @@ void fragment() {
 	float color = 0.0;
 	float starValue = rand(pos);
 
-	if (starValue > prob)
-	{
-		vec2 center = size * pos + vec2(size, size) * 0.5;
-		float t = 0.9 + 0.2 * sin(TIME * 8.0 + (starValue - prob) / (1.0 - prob) * 45.0);
-		color = 1.0 - distance(FRAGCOORD.xy, center) / (0.5 * size);
-		color = color * t / (abs(FRAGCOORD.y - center.y)) * t / (abs(FRAGCOORD.x - center.x));
-	}
+	//if (starValue > prob)
+	//{
+		//vec2 center = size * pos + vec2(size, size) * 0.5;
+		//float t = 0.9 + 0.2 * sin(TIME * 8.0 + (starValue - prob) / (1.0 - prob) * 45.0);
+		//color = 1.0 - distance(FRAGCOORD.xy, center) / (0.5 * size);
+		//color = color * t / (abs(FRAGCOORD.y - center.y)) * t / (abs(FRAGCOORD.x - center.x));
+	//}
 	if (rand(SCREEN_UV.xy / 20.0) > 0.996)
 	{
 		float r = rand(SCREEN_UV.xy);

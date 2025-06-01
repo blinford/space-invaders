@@ -23,7 +23,12 @@ func _process(delta: float) -> void:
 func _on_area_entered(area: Area2D) -> void:
 	if area.is_in_group("bullets"):
 		destroyed.emit()
-		queue_free()
+		$Sprite2D.hide()
+		$AnimatedSprite2D.show()
+		$AnimatedSprite2D.play("default")
 
 func freeze() -> void:
 	frozen = true
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	queue_free()

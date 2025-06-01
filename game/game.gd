@@ -8,9 +8,13 @@ signal game_over
 @onready var power_up_scene = preload("res://game/power_up/power_up.tscn")
 
 @onready var game_over_area = $Area2D
-@onready var hud : CenterContainer = $HUD
-@onready var score_label : Label = $HUD/HBoxContainer/ScoreLabel
-@onready var time_label : Label = $HUD/HBoxContainer/TimeLabel
+
+@onready var top_hud : CenterContainer = $TopHUD
+@onready var score_label : Label = $TopHUD/HBoxContainer/VBoxContainer/ScoreLabel
+@onready var time_label : Label = $TopHUD/HBoxContainer/VBoxContainer/TimeLabel
+
+@onready var bottom_hud : CenterContainer = $BottomHUD
+@onready var power_up_label : Label = $BottomHUD/PowerUpLabel
 
 @onready var game_over_screen : CenterContainer = $GameOverScreen
 @onready var game_over_label : Label = $GameOverScreen/VBoxContainer/GameOverLabel
@@ -37,7 +41,9 @@ func _ready() -> void:
 	var collision_shape : RectangleShape2D = game_over_area.get_child(0).shape
 	collision_shape.size.y = get_viewport().size.y
 	
-	hud.size.x = get_viewport().size.x
+	top_hud.size.x = get_viewport().size.x
+	bottom_hud.position.x += get_viewport().size.x / 2
+	bottom_hud.position.y += get_viewport().size.y - 50
 	game_over_screen.size = get_viewport().size
 	
 	_spawn_horde()
@@ -77,9 +83,11 @@ func _spawn_power_up() -> void:
 func _activate_speed_boost() -> void:
 	player.max_speed = 1000.0
 	speed_boost.start()
+	power_up_label.text = "Speed Boost Active!!"
 
 func _deactivate_speed_boost() -> void:
 	player.max_speed = 700.0
+	power_up_label.text = ""
 	
 func _on_enemy_destroyed() -> void:
 	score += 1
@@ -87,17 +95,25 @@ func _on_enemy_destroyed() -> void:
 	
 func _on_game_over_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemies"):
-		is_game_over = true
-		player.freeze()
-		for freezable_node in get_tree().get_nodes_in_group("freezable"):
-			freezable_node.freeze()
-		_show_game_over_screen()
+		_game_over()
+		
+func _game_over():
+	is_game_over = true
+	_freeze_game()
+	_show_game_over_screen()
+	top_hud.hide()
+
+func _freeze_game() -> void:
+	player.freeze()
+	for freezable_node in get_tree().get_nodes_in_group("freezable"):
+		freezable_node.freeze()
 
 func _show_game_over_screen() -> void:
 	game_over_screen.visible = true
 	summary_label.text = 'Score: '+str(score)+'\n'+'Time Alive: '+str((time_now-time_start)/1000)
 		
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_ENTER and is_game_over:
-			game_over.emit()
+	if Input.is_action_pressed("back") and Input.is_action_pressed("start"):
+		_game_over()
+	if Input.is_action_pressed("enter") and is_game_over:
+		game_over.emit()

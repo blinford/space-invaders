@@ -9,15 +9,15 @@ var time_now
 
 var frozen = false
 
-var x_speed = 100.
+@export var x_speed = 100.
 
 # a*sin(w*x+k)
-var x_sin_a = 50
-var x_sin_w = 1/1000.
-var x_sin_k = randf_range(0, 2*3.14)
-var y_sin_a = 100
-var y_sin_w = 1/1000.
-var y_sin_k = randf_range(0, 2*3.14)
+@export var x_sin_a = 50
+@export var x_sin_w = 1/1000.
+@export var x_sin_k = randf_range(0, 2*3.14)
+@export var y_sin_a = 100
+@export var y_sin_w = 1/1000.
+@export var y_sin_k = randf_range(0, 2*3.14)
 
 func _ready() -> void:
 	time_start = Time.get_ticks_msec()
@@ -32,7 +32,7 @@ func _ready() -> void:
 			var enemy = enemy_scene.instantiate()
 			enemy.connect("destroyed", _on_enemy_destroyed)
 			add_child(enemy)
-			enemy.position.x = get_viewport().size.x - (i * distance_between_enemies)
+			enemy.position.x = get_viewport().size.x - (i * distance_between_enemies) + 50
 			enemy.position.y = j * distance_between_enemies + random_y
 
 func _process(delta: float) -> void:

@@ -1,10 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://c73j6owcjepc7"]
+[gd_scene load_steps=7 format=3 uid="uid://c73j6owcjepc7"]
 
-[ext_resource type="Script" path="res://game/game.gd" id="1_thwth"]
+[ext_resource type="Script" uid="uid://c5n7h5ffkdpk0" path="res://game/game.gd" id="1_thwth"]
 [ext_resource type="PackedScene" uid="uid://dwiqwwft8qbrr" path="res://game/player/player.tscn" id="2_pqu3n"]
+[ext_resource type="Shader" uid="uid://btwtkodk0ciaa" path="res://menu/title/title.gdshader" id="3_dkbly"]
 [ext_resource type="Material" uid="uid://cbcg8whuh7kk4" path="res://menu/title/title.tres" id="3_gpg2h"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cb8x3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s42dt"]
+shader = ExtResource("3_dkbly")
+shader_parameter/center = Vector2(100, 100)
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_thwth")
@@ -28,27 +33,57 @@ one_shot = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_cb8x3")
 
-[node name="HUD" type="CenterContainer" parent="."]
+[node name="TopHUD" type="CenterContainer" parent="."]
 anchors_preset = 10
 anchor_right = 1.0
+offset_top = 50.0
+offset_right = 304.0
+offset_bottom = 192.0
 grow_horizontal = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+[node name="HBoxContainer" type="HBoxContainer" parent="TopHUD"]
 layout_mode = 2
 
-[node name="ScoreLabel" type="Label" parent="HUD/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TopHUD/HBoxContainer"]
 layout_mode = 2
 
-[node name="TimeLabel" type="Label" parent="HUD/HBoxContainer"]
+[node name="ScoreLabel" type="Label" parent="TopHUD/HBoxContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Score: 0"
+horizontal_alignment = 1
+
+[node name="TimeLabel" type="Label" parent="TopHUD/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+text = "Time Alive: 0"
+horizontal_alignment = 1
+
+[node name="BottomHUD" type="CenterContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -114.0
+offset_top = -69.0
+offset_right = 114.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="PowerUpLabel" type="Label" parent="BottomHUD"]
+material = SubResource("ShaderMaterial_s42dt")
+layout_mode = 2
+theme_override_font_sizes/font_size = 50
+horizontal_alignment = 1
 
 [node name="GameOverScreen" type="CenterContainer" parent="."]
 visible = false
 z_index = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_right = 301.0
-offset_bottom = 160.0
+offset_right = 421.0
+offset_bottom = 241.0
 grow_horizontal = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="GameOverScreen"]

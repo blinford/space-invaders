@@ -1,10 +1,34 @@
-[gd_scene load_steps=4 format=3 uid="uid://bnmqpjw8l7s3k"]
+[gd_scene load_steps=9 format=3 uid="uid://bnmqpjw8l7s3k"]
 
-[ext_resource type="Script" path="res://game/horde/enemy/enemy.gd" id="1_ypj01"]
+[ext_resource type="Script" uid="uid://cfgpvij3ii2wx" path="res://game/horde/enemy/enemy.gd" id="1_ypj01"]
 [ext_resource type="Texture2D" uid="uid://ex2utif16ulj" path="res://icon.svg" id="2_l54fk"]
+[ext_resource type="Texture2D" uid="uid://l6l348lb0bl4" path="res://game/horde/enemy/explosion/pixil-frame-0-1.png" id="3_646x7"]
+[ext_resource type="Texture2D" uid="uid://bayec5ecouo7j" path="res://game/horde/enemy/explosion/pixil-frame-0-2.png" id="4_2jovl"]
+[ext_resource type="Texture2D" uid="uid://bnwgud38rm5wx" path="res://game/horde/enemy/explosion/pixil-frame-0-5.png" id="5_0crnd"]
+[ext_resource type="Texture2D" uid="uid://wa1wfv8pdesd" path="res://game/horde/enemy/explosion/pixil-frame-0-4.png" id="6_ybr8b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jejpc"]
 size = Vector2(62, 62)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gpitj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_646x7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_2jovl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0crnd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_ybr8b")
+}],
+"loop": false,
+"name": &"default",
+"speed": 12.0
+}]
 
 [node name="Enemy" type="Area2D" groups=["enemies"]]
 script = ExtResource("1_ypj01")
@@ -31,4 +55,13 @@ horizontal_alignment = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jejpc")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+visible = false
+texture_filter = 1
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_gpitj")
+frame = 3
+frame_progress = 1.0
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

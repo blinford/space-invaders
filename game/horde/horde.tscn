@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b2abyj1w4lona"]
 
-[ext_resource type="Script" path="res://game/horde/horde.gd" id="1_kusuk"]
+[ext_resource type="Script" uid="uid://c4vkap5c8f2ex" path="res://game/horde/horde.gd" id="1_kusuk"]
 
 [node name="Horde" type="Node2D" groups=["freezable", "hordes"]]
 script = ExtResource("1_kusuk")
